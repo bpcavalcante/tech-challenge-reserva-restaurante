@@ -36,7 +36,7 @@ public class RestauranteSqlRepositoryImpl implements RestauranteRepositoryPort {
 
   @Override
   public List<RestauranteDatabaseDTO> buscar(String nome, String localizacao, String tipoCozinha) {
-    return restauranteJpaRepository.buscar(nome, localizacao, tipoCozinha).stream()
+    return restauranteJpaRepository.buscarComAvaliacoes(nome, localizacao, tipoCozinha).stream()
         .map(RestauranteEntity::toDatabaseDTO)
         .collect(Collectors.toList());
   }

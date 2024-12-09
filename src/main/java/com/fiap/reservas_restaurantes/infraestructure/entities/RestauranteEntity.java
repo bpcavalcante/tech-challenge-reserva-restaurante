@@ -2,11 +2,15 @@ package com.fiap.reservas_restaurantes.infraestructure.entities;
 
 import com.fiap.reservas_restaurantes.domain.ports.dto.RestauranteDatabaseDTO;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -33,6 +37,8 @@ public class RestauranteEntity {
   private Integer capacidade;
   private LocalDateTime horarioAbertura;
   private LocalDateTime horarioFechamento;
+  @OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
+  private List<AvaliacaoEntity> avaliacoes;
 
   public RestauranteDatabaseDTO toDatabaseDTO() {
     return RestauranteDatabaseDTO.builder()
@@ -43,7 +49,13 @@ public class RestauranteEntity {
         .capacidade(this.capacidade)
         .horarioAbertura(this.horarioAbertura)
         .horarioFechamento(this.horarioFechamento)
+        .avaliacoes(this.avaliacoes != null ?
+            this.avaliacoes.stream()
+                .map(AvaliacaoEntity::toDatabaseDTO)
+                .collect(Collectors.toList())
+            : null)
         .build();
   }
+
 
 }

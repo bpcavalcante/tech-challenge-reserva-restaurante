@@ -2,6 +2,7 @@ package com.fiap.reservas_restaurantes.domain.ports.dto;
 
 import com.fiap.reservas_restaurantes.aplicacion.ports.dto.RestauranteDTO;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class RestauranteDatabaseDTO {
   private Integer capacidade;
   private LocalDateTime horarioAbertura;
   private LocalDateTime horarioFechamento;
+  private List<AvaliacaoDatabaseDTO> avaliacoes;
 
   public RestauranteDTO toDTO() {
     return RestauranteDTO.builder()

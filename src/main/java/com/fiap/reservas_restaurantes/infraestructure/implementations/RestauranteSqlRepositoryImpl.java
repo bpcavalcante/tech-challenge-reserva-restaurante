@@ -5,6 +5,8 @@ import com.fiap.reservas_restaurantes.domain.ports.dto.RestauranteDatabaseDTO;
 import com.fiap.reservas_restaurantes.infraestructure.RestauranteJpaRepository;
 import com.fiap.reservas_restaurantes.infraestructure.entities.RestauranteEntity;
 import jakarta.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 
@@ -30,5 +32,12 @@ public class RestauranteSqlRepositoryImpl implements RestauranteRepositoryPort {
     } catch (DataAccessException e) {
       throw new RuntimeException("Erro ao tentar salvar o restaurante", e);
     }
+  }
+
+  @Override
+  public List<RestauranteDatabaseDTO> buscar(String nome, String localizacao, String tipoCozinha) {
+    return restauranteJpaRepository.buscar(nome, localizacao, tipoCozinha).stream()
+        .map(RestauranteEntity::toDatabaseDTO)
+        .collect(Collectors.toList());
   }
 }

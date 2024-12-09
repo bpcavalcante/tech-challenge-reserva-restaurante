@@ -38,6 +38,7 @@ public class RestauranteDTO {
         .localizacao(this.localizacao)
         .tipoCozinha(this.tipoCozinha)
         .capacidade(this.capacidade)
+        .horarioAbertura(this.horarioAbertura)
         .horarioFechamento(this.horarioFechamento)
         .build();
   }

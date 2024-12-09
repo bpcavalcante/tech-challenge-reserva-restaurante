@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_restaurantes
+    environment:
+      POSTGRES_USER: bruno
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: restaurantedb
+    ports:
+      - 5432:5432
+    # Guardamos os arquivos de banco de dados nessa pasta, para não perdermos
+    volumes:
+      - ./postgres:/var/lib/postgresql/data

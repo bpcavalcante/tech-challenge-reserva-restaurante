@@ -39,6 +39,8 @@ public class RestauranteEntity {
   private LocalDateTime horarioFechamento;
   @OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
   private List<AvaliacaoEntity> avaliacoes;
+  @OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
+  private List<ReservaEntity> reservas;
 
   public RestauranteDatabaseDTO toDatabaseDTO() {
     return RestauranteDatabaseDTO.builder()

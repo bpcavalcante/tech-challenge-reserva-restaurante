@@ -2,13 +2,17 @@ package com.fiap.reservas_restaurantes.aplicacion.controller.dto.input;
 
 import com.fiap.reservas_restaurantes.aplicacion.ports.dto.RestauranteDTO;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RestauranteInput {
   private String nome;
   private String localizacao;

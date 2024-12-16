@@ -4,7 +4,6 @@ import com.fiap.reservas_restaurantes.aplicacion.controller.dto.input.AvaliacaoI
 import com.fiap.reservas_restaurantes.aplicacion.controller.dto.output.AvaliacaoOutput;
 import com.fiap.reservas_restaurantes.aplicacion.ports.CadastrarAvaliacaoUseCasePorts;
 import com.fiap.reservas_restaurantes.aplicacion.ports.dto.AvaliacaoDTO;
-import com.fiap.reservas_restaurantes.aplicacion.ports.dto.RestauranteDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;

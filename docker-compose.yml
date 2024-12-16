@@ -9,6 +9,19 @@ services:
       POSTGRES_DB: restaurantedb
     ports:
       - 5432:5432
-    # Guardamos os arquivos de banco de dados nessa pasta, para não perdermos
     volumes:
       - ./postgres:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: reservas_restaurantes
+    ports:
+      - 8080:80
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_restaurantes:5432/restaurantedb
+      SPRING_DATASOURCE_USERNAME: bruno
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - postgres

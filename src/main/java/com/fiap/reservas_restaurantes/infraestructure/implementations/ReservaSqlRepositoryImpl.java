@@ -20,28 +20,34 @@ public class ReservaSqlRepositoryImpl implements ReservaRepositoryPort {
 
   @Override
   public ReservaDatabaseDTO save(ReservaDatabaseDTO reservaDatabaseDTO) {
-    try{
+    try {
       RestauranteEntity restaurante =
-          restauranteJpaRepository.findById(reservaDatabaseDTO.getRestauranteId())
+          restauranteJpaRepository
+              .findById(reservaDatabaseDTO.getRestauranteId())
               .orElseThrow(() -> new RuntimeException("Restaurante não encontrado"));
 
-      ReservaEntity newReserva = ReservaEntity.builder().nome(reservaDatabaseDTO.getNome())
-          .email(reservaDatabaseDTO.getEmail())
-          .quantidadePessoas(reservaDatabaseDTO.getQuantidadePessoas())
-          .dataHoraReserva(reservaDatabaseDTO.getDataHoraReserva())
-          .status(reservaDatabaseDTO.getStatus())
-          .restaurante(restaurante).build();
+      ReservaEntity newReserva =
+          ReservaEntity.builder()
+              .id(reservaDatabaseDTO.getId())
+              .nome(reservaDatabaseDTO.getNome())
+              .email(reservaDatabaseDTO.getEmail())
+              .quantidadePessoas(reservaDatabaseDTO.getQuantidadePessoas())
+              .dataHoraReserva(reservaDatabaseDTO.getDataHoraReserva())
+              .status(reservaDatabaseDTO.getStatus())
+              .restaurante(restaurante)
+              .build();
 
       return reservaJpaRepository.save(newReserva).toDatabaseDTO();
 
     } catch (DataAccessException e) {
-      throw new RuntimeException("Erro ao inserir reserva", e);
+      throw new RuntimeException("Erro ao inserir/atualizar reserva", e);
     }
   }
 
   @Override
   public boolean existeConflito(Long restauranteId, LocalDateTime dataHoraReserva) {
-    return reservaJpaRepository.existsByRestauranteIdAndDataHoraReserva(restauranteId, dataHoraReserva);
+    return reservaJpaRepository.existsByRestauranteIdAndDataHoraReserva(
+        restauranteId, dataHoraReserva);
   }
 
   @Override

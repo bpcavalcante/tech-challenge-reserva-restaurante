@@ -2,6 +2,7 @@ package com.fiap.reservas_restaurantes.aplicacion.controller;
 
 import com.fiap.reservas_restaurantes.aplicacion.controller.dto.input.ReservaInput;
 import com.fiap.reservas_restaurantes.aplicacion.controller.dto.output.ReservaOutput;
+import com.fiap.reservas_restaurantes.aplicacion.ports.AtualizarReservaUseCasePorts;
 import com.fiap.reservas_restaurantes.aplicacion.ports.BuscarReservaUseCasePorts;
 import com.fiap.reservas_restaurantes.aplicacion.ports.CriarReservaRestauranteUseCasePorts;
 import com.fiap.reservas_restaurantes.aplicacion.ports.dto.ReservaDTO;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,7 @@ public class ReservaController {
 
   private final CriarReservaRestauranteUseCasePorts criarReservaRestauranteUseCasePorts;
   private final BuscarReservaUseCasePorts buscarReservaUseCasePorts;
+  private final AtualizarReservaUseCasePorts atualizarReservaUseCasePorts;
 
   @PostMapping
   public ResponseEntity<ReservaOutput> criarReserva(@RequestBody ReservaInput reservaInput){
@@ -32,6 +35,12 @@ public class ReservaController {
   @GetMapping("/{id}")
   public ResponseEntity<ReservaOutput> visualizarReserva(@PathVariable Long id){
     ReservaDTO reservaDTO = buscarReservaUseCasePorts.buscarReserva(id);
+    return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(reservaDTO.toOutput());
+  }
+
+  @PutMapping("{id}")
+  public ResponseEntity<ReservaOutput> atualizarReserva(@PathVariable Long id, @RequestBody ReservaInput reservaInput){
+    ReservaDTO reservaDTO = atualizarReservaUseCasePorts.atualizarReserva(id, reservaInput.reservaInputToDTO());
     return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(reservaDTO.toOutput());
   }
 

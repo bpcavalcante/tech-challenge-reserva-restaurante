@@ -15,12 +15,17 @@ public class ReservaDatabaseDTO {
   private String email;
   private Integer quantidadePessoas;
   private LocalDateTime dataHoraReserva;
+  private String status;
   private Long restauranteId;
 
   public ReservaDTO toDTO() {
-    return ReservaDTO.builder().id(this.id).nome(this.nome).email(this.email)
+    return ReservaDTO.builder()
+        .id(this.id)
+        .nome(this.nome)
+        .email(this.email)
         .quantidadePessoas(this.quantidadePessoas)
         .dataHoraReserva(this.dataHoraReserva)
+        .status(this.status)
         .restauranteId(this.restauranteId)
         .build();
   }

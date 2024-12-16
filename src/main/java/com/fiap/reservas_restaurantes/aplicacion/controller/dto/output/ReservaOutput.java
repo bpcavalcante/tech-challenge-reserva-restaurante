@@ -14,5 +14,6 @@ public class ReservaOutput {
   private String email;
   private Integer quantidadePessoas;
   private LocalDateTime dataHoraReserva;
+  private String status;
   private Long restauranteId;
 }

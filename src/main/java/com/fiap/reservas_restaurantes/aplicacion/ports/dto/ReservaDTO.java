@@ -16,17 +16,30 @@ public class ReservaDTO {
   private String email;
   private Integer quantidadePessoas;
   private LocalDateTime dataHoraReserva;
+  private String status;
   private Long restauranteId;
 
   public ReservaOutput toOutput() {
-    return ReservaOutput.builder().id(this.id).nome(this.nome).email(this.email)
-        .quantidadePessoas(this.quantidadePessoas).dataHoraReserva(this.dataHoraReserva).restauranteId(this.restauranteId).build();
+    return ReservaOutput.builder()
+        .id(this.id)
+        .nome(this.nome)
+        .email(this.email)
+        .quantidadePessoas(this.quantidadePessoas)
+        .dataHoraReserva(this.dataHoraReserva)
+        .status(this.status)
+        .restauranteId(this.restauranteId)
+        .build();
   }
 
   public Reserva toDomain() {
-    return Reserva.builder().id(this.id).nome(this.nome).email(this.email)
+    return Reserva.builder()
+        .id(this.id)
+        .nome(this.nome)
+        .email(this.email)
         .quantidadePessoas(this.quantidadePessoas)
         .dataHoraReserva(this.dataHoraReserva)
-        .restauranteId(this.restauranteId).build();
+        .status(this.status)
+        .restauranteId(this.restauranteId)
+        .build();
   }
 }

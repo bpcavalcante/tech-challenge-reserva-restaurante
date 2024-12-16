@@ -1,5 +1,6 @@
 package com.fiap.reservas_restaurantes.infraestructure.entities;
 
+import com.fiap.reservas_restaurantes.domain.Reserva;
 import com.fiap.reservas_restaurantes.domain.ports.dto.ReservaDatabaseDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +35,7 @@ public class ReservaEntity {
   private String email;
   private Integer quantidadePessoas;
   private LocalDateTime dataHoraReserva;
+  private String status;
 
   @ManyToOne
   @JoinColumn(name = "restaurante_id")
@@ -46,7 +48,20 @@ public class ReservaEntity {
         .email(this.email)
         .quantidadePessoas(this.quantidadePessoas)
         .dataHoraReserva(this.dataHoraReserva)
+        .status(this.status)
         .restauranteId(this.restaurante != null ? this.restaurante.getId() : null)
+        .build();
+  }
+
+  public Reserva toDomain() {
+    return Reserva.builder()
+        .id(this.id)
+        .nome(this.nome)
+        .email(this.email)
+        .quantidadePessoas(this.quantidadePessoas)
+        .dataHoraReserva(this.dataHoraReserva)
+        .status(this.status)
+        .restauranteId(this.restaurante.getId())
         .build();
   }
 }

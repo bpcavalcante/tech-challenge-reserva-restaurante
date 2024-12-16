@@ -19,7 +19,7 @@ public class CriarReservaRestauranteUseCase implements CriarReservaRestauranteUs
       throw new IllegalArgumentException("Já existe uma reserva para este horario");
     }
     Reserva reserva = reservaDTO.toDomain();
-    ReservaDatabaseDTO reservaDatabaseDTO = reservaRepositoryPort.save(reserva.toDTO());
+    ReservaDatabaseDTO reservaDatabaseDTO = reservaRepositoryPort.save(reserva.toDatabaseDTO());
     return reservaDatabaseDTO.toDTO();
   }
 }

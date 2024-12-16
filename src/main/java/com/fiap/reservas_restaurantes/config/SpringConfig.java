@@ -3,6 +3,7 @@ package com.fiap.reservas_restaurantes.config;
 import com.fiap.reservas_restaurantes.domain.ports.AvaliacaoRepositoryPort;
 import com.fiap.reservas_restaurantes.domain.ports.ReservaRepositoryPort;
 import com.fiap.reservas_restaurantes.domain.ports.RestauranteRepositoryPort;
+import com.fiap.reservas_restaurantes.domain.usecase.BuscarReservaUseCase;
 import com.fiap.reservas_restaurantes.domain.usecase.BuscarRestauranteUseCase;
 import com.fiap.reservas_restaurantes.domain.usecase.CadastrarAvaliacaoUseCase;
 import com.fiap.reservas_restaurantes.domain.usecase.CadastrarRestauranteUseCase;
@@ -41,6 +42,11 @@ public class SpringConfig implements WebMvcConfigurer {
   @Bean
   public CriarReservaRestauranteUseCase criarReservaRestauranteUseCase(ReservaRepositoryPort reservaRepositoryPort) {
     return new CriarReservaRestauranteUseCase(reservaRepositoryPort);
+  }
+
+  @Bean
+  public BuscarReservaUseCase buscarReservaUseCase(ReservaRepositoryPort reservaRepositoryPort) {
+    return new BuscarReservaUseCase(reservaRepositoryPort);
   }
 
   @Bean

@@ -17,7 +17,10 @@ WORKDIR /app
 COPY --from=builder /app/target/reservas-restaurantes-0.0.1-SNAPSHOT.jar app.jar
 
 # Expor a porta usada pela aplicação
-EXPOSE 8080
+EXPOSE 80
+
+# Definir o perfil ativo para o Spring Boot
+ENV SPRING_PROFILES_ACTIVE=docker
 
 # Comando para rodar a aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]

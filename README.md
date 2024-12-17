@@ -1,4 +1,4 @@
-# Tech Challenge Parquimetro
+# Tech Challenge Reserva e Avaliação de Restaurantes
 
 ## Visão Geral
 
